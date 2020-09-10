@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import Alert from './Alert';
+import Home from '../layout/Home';
+import Login from './auth/Login';
 import setAuthToken from '../utils/setAuthToken';
 import { loadUser } from '../redux/actions/authActions';
 import store from '../redux/store';
@@ -16,10 +19,13 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <div className="App">
+      <Router>
         <Alert />
-        <h1>Hello World</h1>
-      </div>
+        <Route path="/" exact component={Home} />
+        <Switch>
+          <Route path="/" exact component={Login} />
+        </Switch>
+      </Router>
     </Provider>
   );
 };
