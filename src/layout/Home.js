@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import logoutIcon from '../images/logout.png';
+// import Footer from './Footer';
 
 const Home = ({ auth: { isAuthenticated, user } }) => (
   <div className="h-100">

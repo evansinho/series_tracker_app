@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import Alert from './Alert';
 import Home from '../layout/Home';
 import Login from './auth/Login';
+import Register from './auth/Register';
 import setAuthToken from '../utils/setAuthToken';
 import { loadUser } from '../redux/actions/authActions';
 import store from '../redux/store';
@@ -23,7 +24,8 @@ const App = () => {
         <Alert />
         <Route path="/" exact component={Home} />
         <Switch>
-          <Route path="/" exact component={Login} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/signup" exact component={Register} />
         </Switch>
       </Router>
     </Provider>
