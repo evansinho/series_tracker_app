@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import {
   REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_FAIL, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS,
 } from '../actions/types';
