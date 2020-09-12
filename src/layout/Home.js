@@ -7,7 +7,7 @@ import Footer from './Footer';
 
 const Home = ({ auth: { isAuthenticated, user } }) => (
   <div className="h-100">
-    {isAuthenticated === false ? (
+    {isAuthenticated === null ? (
       <div className="d-flex flex-column justify-content-around align-items-center login-page">
         <div className="d-flex flex-column justify-content-center">
           <h1 className="text-white">SERIES TRACKER</h1>

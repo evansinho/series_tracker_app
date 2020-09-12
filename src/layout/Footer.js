@@ -14,7 +14,7 @@ const Footer = () => (
       role="button"
     >
       <img className="footer-img" src={addImg} alt="add-stack" />
-      <p className="mb-0">Add stack</p>
+      <p className="mb-0">Add Series</p>
     </Link>
     <Link
       to="/stacks"

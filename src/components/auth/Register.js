@@ -33,7 +33,7 @@ const Register = () => {
                   className="form-control"
                   autoComplete="name"
                   // value={name}
-                  // onChange={e => onChange(e)}
+                  // onChange={onChange}
                   required
                 />
               </label>
@@ -49,7 +49,7 @@ const Register = () => {
                   className="form-control"
                   autoComplete="email"
                   // value={email}
-                  // onChange={e => onChange(e)}
+                  // onChange={onChange}
                   required
                 />
               </label>
@@ -65,7 +65,7 @@ const Register = () => {
                   className="form-control"
                   autoComplete="new-password"
                   // value={password}
-                  // onChange={e => onChange(e)}
+                  // onChange={onChange}
                   required
                 />
               </label>
