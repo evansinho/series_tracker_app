@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import logoutIcon from '../images/logout.png';
-// import Footer from './Footer';
+import Footer from './Footer';
 
 const Home = ({ auth: { isAuthenticated, user } }) => (
   <div className="h-100">
-    {isAuthenticated === null ? (
+    {isAuthenticated === false ? (
       <div className="d-flex flex-column justify-content-around align-items-center login-page">
         <div className="d-flex flex-column justify-content-center">
           <h1 className="text-white">SERIES TRACKER</h1>
@@ -33,7 +33,7 @@ const Home = ({ auth: { isAuthenticated, user } }) => (
           <img className="logout-img" src={logoutIcon} alt="logout" />
           {/* <button type="button" className="btn ml-3" onClick={}>Logout</button> */}
         </div>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     )}
   </div>

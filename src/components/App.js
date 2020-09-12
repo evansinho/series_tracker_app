@@ -5,9 +5,11 @@ import Alert from './Alert';
 import Home from '../layout/Home';
 import Login from './auth/Login';
 import Register from './auth/Register';
+import AddSeries from './series/AddSeries';
 import setAuthToken from '../utils/setAuthToken';
 import { loadUser } from '../redux/actions/authActions';
 import store from '../redux/store';
+import PrivateRoute from '../routing/PrivateRoute';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -26,6 +28,7 @@ const App = () => {
         <Switch>
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={Register} />
+          <PrivateRoute path="/serie" exact component={AddSeries} />
         </Switch>
       </Router>
     </Provider>
