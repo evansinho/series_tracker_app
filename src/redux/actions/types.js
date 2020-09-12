@@ -12,6 +12,7 @@ export const AUTH_FAIL = 'AUTH_FAIL';
 export const ADD_MOVIES = 'ADD_MOVIES';
 export const GET_MOVIES = 'GET_MOVIES';
 export const GET_MOVIE = 'GET_MOVIE';
+export const MOVIES_ERROR = 'MOVIES_ERROR';
 export const DELETE_MOVIE = 'DELETE_MOVIE';
 export const UPDATE_MOVIE = 'UPDATE_MOVIE';
 export const PROGRESS_FEED = 'PROGRESS_FEED';
