@@ -1,27 +1,28 @@
-import React from 'react';
+/* eslint-disable no-undef */
+import React, { useState } from 'react';
 // import PropTypes from 'prop-types';
 
 const Register = () => {
-  // const { formData, setFormData } = useState({
-  //   name: '',
-  //   email: '',
-  //   password: '',
-  // });
+  const { formData, setFormData } = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
 
-  // const { name, email, password } = formData;
+  const { name, email, password } = formData || {};
 
-  // const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  // const onSubmit = e => {
-  //   e.preventDafault();
-  //   // const newUser = { name, email, password };
-  // };
+  const onSubmit = e => {
+    e.preventDafault();
+    // const newUser = { name, email, password };
+  };
 
   return (
     <div className="d-flex flex-column justify-content-around align-items-center login-page">
       <div className="row">
         <div>
-          <form>
+          <form onSubmit={onSubmit}>
             <div className="form-group">
               <label htmlFor="name">
                 Name
@@ -32,8 +33,8 @@ const Register = () => {
                   placeholder="Name"
                   className="form-control"
                   autoComplete="name"
-                  // value={name}
-                  // onChange={onChange}
+                  value={name}
+                  onChange={e => onChange(e)}
                   required
                 />
               </label>
@@ -48,8 +49,8 @@ const Register = () => {
                   placeholder="E-mail"
                   className="form-control"
                   autoComplete="email"
-                  // value={email}
-                  // onChange={onChange}
+                  value={email}
+                  onChange={e => onChange(e)}
                   required
                 />
               </label>
@@ -64,8 +65,8 @@ const Register = () => {
                   placeholder="Password"
                   className="form-control"
                   autoComplete="new-password"
-                  // value={password}
-                  // onChange={onChange}
+                  value={password}
+                  onChange={e => onChange(e)}
                   required
                 />
               </label>
