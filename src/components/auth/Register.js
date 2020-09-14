@@ -1,22 +1,29 @@
 /* eslint-disable no-undef */
 import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { register } from '../../redux/actions/authActions';
 
-const Register = () => {
-  const { formData, setFormData } = useState({
+const Register = ({ register, authenticated }) => {
+  const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
   });
 
-  const { name, email, password } = formData || {};
+  const { name, email, password } = formData;
 
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = e => {
-    e.preventDafault();
-    // const newUser = { name, email, password };
+  const onSubmit = async e => {
+    e.preventDefault();
+    register({ name, email, password });
   };
+
+  if (authenticated) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <div className="d-flex flex-column justify-content-around align-items-center login-page">
@@ -34,7 +41,7 @@ const Register = () => {
                   className="form-control"
                   autoComplete="name"
                   value={name}
-                  onChange={e => onChange(e)}
+                  onChange={onChange}
                   required
                 />
               </label>
@@ -50,7 +57,7 @@ const Register = () => {
                   className="form-control"
                   autoComplete="email"
                   value={email}
-                  onChange={e => onChange(e)}
+                  onChange={onChange}
                   required
                 />
               </label>
@@ -66,7 +73,7 @@ const Register = () => {
                   className="form-control"
                   autoComplete="new-password"
                   value={password}
-                  onChange={e => onChange(e)}
+                  onChange={onChange}
                   required
                 />
               </label>
@@ -84,8 +91,13 @@ const Register = () => {
   );
 };
 
-// Register.propTypes = {
+Register.propTypes = {
+  register: PropTypes.func.isRequired,
+  authenticated: PropTypes.shape({}).isRequired,
+};
 
-// };
+const mapStateToProps = state => ({
+  authenticated: state.auth.payload,
+});
 
-export default Register;
+export default connect(mapStateToProps, { register })(Register);

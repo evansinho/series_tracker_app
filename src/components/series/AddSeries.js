@@ -66,7 +66,7 @@ const AddSeries = () => (
                 step="0.01"
                 inputMode="numeric"
                 className="form-control"
-                placeholder="Projects completed"
+                placeholder="Seasons completed"
                 required
               />
             </label>

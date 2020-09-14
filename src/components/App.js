@@ -24,8 +24,8 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <Alert />
-        <Route path="/" exact component={Home} />
         <Switch>
+          <Route path="/" exact component={Home} />
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={Register} />
           <PrivateRoute path="/serie" exact component={AddSeries} />

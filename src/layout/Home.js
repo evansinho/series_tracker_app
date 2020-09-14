@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import logoutIcon from '../images/logout.png';
+import { logout } from '../redux/actions/authActions';
 import Footer from './Footer';
 
-const Home = ({ auth: { isAuthenticated, user } }) => (
+const Home = ({ auth: { isAuthenticated, payload }, logout }) => (
   <div className="h-100">
-    {isAuthenticated === null ? (
+    {isAuthenticated === false ? (
       <div className="d-flex flex-column justify-content-around align-items-center login-page">
         <div className="d-flex flex-column justify-content-center">
           <h1 className="text-white">SERIES TRACKER</h1>
@@ -26,12 +27,9 @@ const Home = ({ auth: { isAuthenticated, user } }) => (
         <div className="header-title">
           Home
         </div>
-        <div className="user-email">
-          {/* {user.email} */}
-        </div>
         <div className="logout-button d-flex align-items-center">
           <img className="logout-img" src={logoutIcon} alt="logout" />
-          {/* <button type="button" className="btn ml-3" onClick={}>Logout</button> */}
+          <button type="button" className="btn ml-3" onClick={logout}>Logout</button>
         </div>
         <Footer />
       </div>
@@ -41,16 +39,14 @@ const Home = ({ auth: { isAuthenticated, user } }) => (
 
 Home.propTypes = {
   auth: PropTypes.shape({
-    user: PropTypes.string.isRequired,
     isAuthenticated: PropTypes.bool.isRequired,
+    payload: PropTypes.shape({}).isRequired,
   }).isRequired,
-  user: PropTypes.shape({
-    email: PropTypes.string.isRequired,
-  }).isRequired,
+  logout: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps, { logout })(Home);
