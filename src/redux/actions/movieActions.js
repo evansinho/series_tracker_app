@@ -16,6 +16,8 @@ export const addMovies = formData => async dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
   };
   try {
@@ -24,11 +26,12 @@ export const addMovies = formData => async dispatch => {
       type: ADD_MOVIES,
       payload: res.data,
     });
-    dispatch(setAlert('Movie created', 'success'));
+    // dispatch(setAlert('Movie created', 'success'));
   } catch (err) {
+    console.log(err);
     dispatch({
       type: MOVIES_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: err,
     });
   }
 };
@@ -37,6 +40,8 @@ export const updateMovies = movie => async dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
   };
   try {

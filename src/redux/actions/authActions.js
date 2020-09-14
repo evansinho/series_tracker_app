@@ -1,5 +1,4 @@
 /* eslint-disable import/prefer-default-export */
-
 const baseUrl = 'https://immense-dusk-13622.herokuapp.com/';
 
 const setUser = payload => ({ type: 'SET_USER', payload });
@@ -16,7 +15,6 @@ export const loadUser = () => dispatch => {
     .then(res => res.json())
     .then(data => {
       localStorage.setItem('token', data.token);
-      console.log(data);
       dispatch(setUser(data.user));
     });
 };

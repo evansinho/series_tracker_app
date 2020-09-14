@@ -20,7 +20,7 @@ export default function (state = initialState, action) {
     case ADD_MOVIES:
       return {
         ...state,
-        movies: [payload, ...state.posts],
+        movies: [payload, ...state.movies],
         loading: false,
       };
 

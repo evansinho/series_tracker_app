@@ -6,7 +6,7 @@ import logoutIcon from '../images/logout.png';
 import { logout } from '../redux/actions/authActions';
 import Footer from './Footer';
 
-const Home = ({ auth: { loggedIn }, logout }) => (
+const Home = ({ auth: { loggedIn, user }, logout }) => (
   <div className="h-100">
     {loggedIn === false ? (
       <div className="d-flex flex-column justify-content-around align-items-center login-page">
@@ -27,6 +27,9 @@ const Home = ({ auth: { loggedIn }, logout }) => (
         <div className="header-title">
           Home
         </div>
+        <div className="user-email">
+          {user.email}
+        </div>
         <div className="logout-button d-flex align-items-center">
           <img className="logout-img" src={logoutIcon} alt="logout" />
           <button type="button" className="btn ml-3" onClick={logout}>Logout</button>
@@ -40,6 +43,9 @@ const Home = ({ auth: { loggedIn }, logout }) => (
 Home.propTypes = {
   auth: PropTypes.shape({
     loggedIn: PropTypes.bool.isRequired,
+    user: PropTypes.shape({
+      email: PropTypes.string.isRequired,
+    }).isRequired,
   }).isRequired,
   logout: PropTypes.func.isRequired,
 };
