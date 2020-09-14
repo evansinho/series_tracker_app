@@ -6,9 +6,9 @@ import logoutIcon from '../images/logout.png';
 import { logout } from '../redux/actions/authActions';
 import Footer from './Footer';
 
-const Home = ({ auth: { isAuthenticated, payload }, logout }) => (
+const Home = ({ auth: { loggedIn }, logout }) => (
   <div className="h-100">
-    {isAuthenticated === false ? (
+    {loggedIn === false ? (
       <div className="d-flex flex-column justify-content-around align-items-center login-page">
         <div className="d-flex flex-column justify-content-center">
           <h1 className="text-white">SERIES TRACKER</h1>
@@ -39,8 +39,7 @@ const Home = ({ auth: { isAuthenticated, payload }, logout }) => (
 
 Home.propTypes = {
   auth: PropTypes.shape({
-    isAuthenticated: PropTypes.bool.isRequired,
-    payload: PropTypes.shape({}).isRequired,
+    loggedIn: PropTypes.bool.isRequired,
   }).isRequired,
   logout: PropTypes.func.isRequired,
 };

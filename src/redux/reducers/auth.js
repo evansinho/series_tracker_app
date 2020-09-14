@@ -1,45 +1,23 @@
 /* eslint-disable max-len */
-import {
-  REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_FAIL, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS,
-} from '../actions/types';
 
 const initialState = {
-  token: localStorage.getItem('token'),
-  isAuthenticated: false,
-  loading: true,
-  user: null,
+  loggedIn: false,
+  user: {},
 };
 
 export default function (state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
-    case USER_LOADED:
+    case 'SET_USER':
       return {
-        ...state,
-        payload,
-        isAuthenticated: true,
-        user: payload,
-        loading: false,
+        loggedIn: true,
+        user: { ...payload },
       };
-    case REGISTER_SUCCESS:
-    case LOGIN_SUCCESS:
-      localStorage.setItem('token', payload.token);
+    case 'LOG_OUT':
+      localStorage.clear();
       return {
-        ...state,
-        payload,
-        isAuthenticated: true,
-        loading: false,
-      };
-    case REGISTER_FAIL:
-    case LOGIN_FAIL:
-    case AUTH_FAIL:
-    case LOGOUT_SUCCESS:
-      localStorage.removeItem('token');
-      return {
-        ...state,
-        token: null,
-        isAuthenticated: false,
-        loading: false,
+        loggedIn: false,
+        user: {},
       };
     default:
       return state;

@@ -1,97 +1,59 @@
 /* eslint-disable import/prefer-default-export */
-import axios from 'axios';
-import { setAlert } from './alertActions';
-import setAuthToken from '../../utils/setAuthToken';
-import {
-  REGISTER_SUCCESS,
-  REGISTER_FAIL,
-  USER_LOADED,
-  AUTH_FAIL,
-  LOGIN_FAIL,
-  LOGIN_SUCCESS,
-  LOGOUT_SUCCESS,
-} from './types';
 
 const baseUrl = 'https://immense-dusk-13622.herokuapp.com/';
+
+const setUser = payload => ({ type: 'SET_USER', payload });
+
 // Load user
-export const loadUser = () => async dispatch => {
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
-  }
-
-  try {
-    const res = await axios.get('/auth');
-
-    dispatch({
-      type: USER_LOADED,
-      payload: res.data,
+export const loadUser = () => dispatch => {
+  fetch(`${baseUrl}/auto_login`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  })
+    .then(res => res.json())
+    .then(data => {
+      localStorage.setItem('token', data.token);
+      console.log(data);
+      dispatch(setUser(data.user));
     });
-  } catch (err) {
-    dispatch({
-      type: AUTH_FAIL,
-    });
-  }
 };
 
 // Register
-export const register = ({ name, email, password }) => async dispatch => {
-  const config = {
+export const register = userInfo => dispatch => {
+  fetch(`${baseUrl}/signup`, {
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      Accept: 'application/json',
     },
-  };
-  const body = JSON.stringify({ name, email, password });
-
-  try {
-    const res = await axios.post(`${baseUrl}/signup`, body, config);
-    dispatch({
-      type: REGISTER_SUCCESS,
-      payload: res.data,
+    body: JSON.stringify(userInfo),
+  })
+    .then(res => res.json())
+    .then(data => {
+      localStorage.setItem('token', data.token);
+      dispatch(setUser(data.user));
     });
-    dispatch(loadUser);
-  } catch (err) {
-    const { errors } = err.res.data;
-
-    if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
-    }
-
-    dispatch({
-      type: REGISTER_FAIL,
-    });
-  }
 };
 
 // Login
-export const login = ({ email, password }) => async dispatch => {
-  const config = {
+export const login = userInfo => dispatch => {
+  fetch(`${baseUrl}/login`, {
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      Accept: 'application/json',
     },
-  };
-  const body = JSON.stringify({ email, password });
-
-  try {
-    const res = await axios.post(`${baseUrl}/login`, body, config);
-    dispatch({
-      type: LOGIN_SUCCESS,
-      payload: res.data,
+    body: JSON.stringify(userInfo),
+  })
+    .then(res => res.json())
+    .then(data => {
+      localStorage.setItem('token', data.token);
+      dispatch(setUser(data.user));
     });
-    dispatch(loadUser);
-  } catch (err) {
-    const { errors } = err.res.data;
-
-    if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
-    }
-
-    dispatch({
-      type: LOGIN_FAIL,
-    });
-  }
 };
 
 // Logout
-export const logout = () => dispatch => {
-  dispatch({ type: LOGOUT_SUCCESS });
-};
+export const logout = () => ({ type: 'LOG_OUT' });

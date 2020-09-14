@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { register } from '../../redux/actions/authActions';
 
-const Register = ({ register, authenticated }) => {
+const Register = ({ register, authenticated: { loggedIn } }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -21,7 +21,7 @@ const Register = ({ register, authenticated }) => {
     register({ name, email, password });
   };
 
-  if (authenticated) {
+  if (loggedIn) {
     return <Redirect to="/" />;
   }
 
@@ -93,11 +93,13 @@ const Register = ({ register, authenticated }) => {
 
 Register.propTypes = {
   register: PropTypes.func.isRequired,
-  authenticated: PropTypes.shape({}).isRequired,
+  authenticated: PropTypes.shape({
+    loggedIn: PropTypes.bool.isRequired,
+  }).isRequired,
 };
 
 const mapStateToProps = state => ({
-  authenticated: state.auth.payload,
+  authenticated: state.auth,
 });
 
 export default connect(mapStateToProps, { register })(Register);
