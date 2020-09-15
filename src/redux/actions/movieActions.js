@@ -28,7 +28,6 @@ export const addMovies = formData => async dispatch => {
     });
     // dispatch(setAlert('Movie created', 'success'));
   } catch (err) {
-    console.log(err);
     dispatch({
       type: MOVIES_ERROR,
       payload: err,
@@ -36,7 +35,31 @@ export const addMovies = formData => async dispatch => {
   }
 };
 
-export const updateMovies = movie => async dispatch => {
+export const updateMovie = (id, movie) => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  };
+
+  try {
+    const res = await axios.put(`${baseUrl}/update/${id}`, movie, config);
+    dispatch({
+      type: UPDATE_MOVIE,
+      payload: res.data,
+    });
+    // dispatch(setAlert('Movie updated', 'success'));
+  } catch (err) {
+    dispatch({
+      type: MOVIES_ERROR,
+      payload: err,
+    });
+  }
+};
+
+export const getMovies = () => async dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -45,23 +68,7 @@ export const updateMovies = movie => async dispatch => {
     },
   };
   try {
-    const res = await axios.put(`${baseUrl}/update/${movie.id}`, movie, config);
-    dispatch({
-      type: UPDATE_MOVIE,
-      payload: res.data,
-    });
-    dispatch(setAlert('Movie updated', 'success'));
-  } catch (err) {
-    dispatch({
-      type: MOVIES_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
-    });
-  }
-};
-
-export const getMovies = () => async dispatch => {
-  try {
-    const res = await axios.get(`${baseUrl}/movies/index`);
+    const res = await axios.get(`${baseUrl}/movies/index`, config);
     dispatch({
       type: GET_MOVIES,
       payload: res.data,
@@ -69,14 +76,21 @@ export const getMovies = () => async dispatch => {
   } catch (err) {
     dispatch({
       type: MOVIES_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: err,
     });
   }
 };
 
 export const getMovie = id => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  };
   try {
-    const res = await axios.get(`${baseUrl}/show/${id}`);
+    const res = await axios.get(`${baseUrl}/show/${id}`, config);
     dispatch({
       type: GET_MOVIE,
       payload: res.data,
@@ -84,14 +98,21 @@ export const getMovie = id => async dispatch => {
   } catch (err) {
     dispatch({
       type: MOVIES_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: err,
     });
   }
 };
 
 export const deleteMovie = id => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  };
   try {
-    await axios.delete(`${baseUrl}/destroy/${id}`);
+    await axios.delete(`${baseUrl}/destroy/${id}`, config);
     dispatch({
       type: DELETE_MOVIE,
       payload: id,
@@ -100,7 +121,7 @@ export const deleteMovie = id => async dispatch => {
   } catch (err) {
     dispatch({
       type: MOVIES_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: err,
     });
   }
 };

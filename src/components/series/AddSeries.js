@@ -27,9 +27,9 @@ const AddSeries = ({ addMovies }) => {
     addMovies({
       name, episode, episode_goal, season, season_goal,
     });
-    // history.push(`/series/${}`);
-    history.push('/thankyou');
+    history.push('/series');
   };
+
   return (
     <div>
       <div className="row mx-0">
@@ -138,6 +138,11 @@ const AddSeries = ({ addMovies }) => {
 
 AddSeries.propTypes = {
   addMovies: PropTypes.func.isRequired,
+  movie: PropTypes.shape({}).isRequired,
 };
 
-export default connect(null, { addMovies })(AddSeries);
+const mapStateToProps = state => ({
+  movie: state.movies.movie,
+});
+
+export default connect(mapStateToProps, { addMovies })(AddSeries);

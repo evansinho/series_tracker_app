@@ -9,7 +9,7 @@ const Footer = () => (
 
   <footer className="footer mt-auto w-100 button-footer d-flex align-items-center">
     <Link
-      to="/series"
+      to="/addseries"
       className="btn btn-lg w-25 h-100 d-flex flex-column align-items-center py-1 px-0 justify-content-between footer-btn"
       role="button"
     >
@@ -17,7 +17,7 @@ const Footer = () => (
       <p className="mb-0">Add Series</p>
     </Link>
     <Link
-      to="/stacks"
+      to="/series"
       className="btn btn-lg w-25 h-100 d-flex flex-column align-items-center py-1 px-0 justify-content-between footer-btn"
       role="button"
     >
