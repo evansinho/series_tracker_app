@@ -16,7 +16,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 
 ## live demo
-[Series Tracker App]()
+[Series Tracker App](https://evanson-series-tracker.netlify.app/)
 
 [Series Tracker API](https://immense-dusk-13622.herokuapp.com/)
 
