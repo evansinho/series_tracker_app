@@ -16,7 +16,7 @@ const Series = ({
   const { id } = match.params;
   useEffect(() => {
     getMovie(id);
-  }, []);
+  }, [getMovie, id]);
 
   const result = (episode, goal) => {
     if (goal === 0) {

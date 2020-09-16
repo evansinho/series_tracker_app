@@ -28,7 +28,8 @@ const EditSeries = ({
       season: !series.season ? '' : series.season,
       season_goal: !series.season_goal ? '' : series.season_goal,
     });
-  }, []);
+  // eslint-disable-next-line max-len
+  }, [getMovie, id, series.episode, series.episode_goal, series.name, series.season, series.season_goal]);
 
   const {
     name, episode, episode_goal, season, season_goal,

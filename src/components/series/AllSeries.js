@@ -12,7 +12,7 @@ import Spinner from '../../layout/Spinner';
 const AllSeries = ({ getMovies, series }) => {
   useEffect(() => {
     getMovies();
-  }, []);
+  }, [getMovies]);
 
   const result = (episode, episode_goal, season, season_goal) => {
     if (episode_goal + season_goal === 0) {

@@ -17,9 +17,7 @@ const Progress = ({ getProgress, progress }) => {
 
   useEffect(() => {
     getProgress();
-  }, []);
-
-  console.log(progress);
+  }, [getProgress]);
 
   return (
     <>
