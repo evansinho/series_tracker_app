@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { PieChart } from 'react-minimal-pie-chart';
@@ -11,7 +11,7 @@ import projectsImg from '../../images/projects.png';
 import hoursImg from '../../images/hours.png';
 
 const Series = ({
-  getMovie, series, match, deleteMovie,
+  getMovie, series, match, deleteMovie, history,
 }) => {
   const { id } = match.params;
   useEffect(() => {
@@ -26,12 +26,9 @@ const Series = ({
     return percentage >= 100 ? 100 : Math.round(percentage);
   };
 
-  const history = useHistory();
-
   const handleDelete = e => {
     e.preventDefault();
-    deleteMovie(id);
-    history.push('/series');
+    deleteMovie(id, history);
   };
 
   return series ? (
@@ -53,7 +50,7 @@ const Series = ({
               label={({ dataEntry }) => dataEntry.key}
               labelStyle={{ fontSize: '1.6rem' }}
             />
-            <p className="mt-2">Hours</p>
+            <p className="mt-2">Episodes</p>
           </div>
           <div className="d-flex flex-column align-items-center justify-content-around">
             <PieChart
@@ -67,7 +64,7 @@ const Series = ({
               label={({ dataEntry }) => dataEntry.key}
               labelStyle={{ fontSize: '1.6rem' }}
             />
-            <p className="mt-2">Projects</p>
+            <p className="mt-2">Seasons</p>
           </div>
         </div>
         <div>
@@ -127,4 +124,4 @@ const mapStateToProps = state => ({
   series: state.movies.movie,
 });
 
-export default connect(mapStateToProps, { getMovie, deleteMovie })(Series);
+export default connect(mapStateToProps, { getMovie, deleteMovie })(withRouter(Series));

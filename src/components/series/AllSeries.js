@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { PieChart } from 'react-minimal-pie-chart';
 import { getMovies } from '../../redux/actions/movieActions';
 import Footer from '../../layout/Footer';
+import Spinner from '../../layout/Spinner';
 
 const AllSeries = ({ getMovies, series }) => {
   useEffect(() => {
@@ -56,7 +57,7 @@ const AllSeries = ({ getMovies, series }) => {
     </div>
   );
 
-  return (
+  return series ? (
     <>
       <div className="header-title">
         Track.it
@@ -70,7 +71,7 @@ const AllSeries = ({ getMovies, series }) => {
       </div>
       <Footer />
     </>
-  );
+  ) : <Spinner />;
 };
 
 AllSeries.propTypes = {

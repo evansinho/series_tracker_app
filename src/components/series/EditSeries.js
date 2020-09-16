@@ -1,14 +1,14 @@
 /* eslint-disable camelcase */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Footer from '../../layout/Footer';
 import { getMovie, updateMovie } from '../../redux/actions/movieActions';
 
 const EditSeries = ({
-  getMovie, match, series, updateMovie,
+  getMovie, match, series, updateMovie, history,
 }) => {
   const [formData, setFormData] = useState({
     name: '',
@@ -36,14 +36,11 @@ const EditSeries = ({
 
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const history = useHistory();
-
   const onSubmit = async e => {
     e.preventDefault();
     updateMovie(id, {
       name, episode, episode_goal, season, season_goal,
-    });
-    history.push(`/series/${id}`);
+    }, history);
   };
 
   return (
@@ -164,4 +161,4 @@ const mapStateToProps = state => ({
   series: state.movies.movie,
 });
 
-export default connect(mapStateToProps, { getMovie, updateMovie })(EditSeries);
+export default connect(mapStateToProps, { getMovie, updateMovie })(withRouter(EditSeries));

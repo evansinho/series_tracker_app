@@ -1,6 +1,5 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
-import { setAlert } from './alertActions';
 import {
   GET_MOVIES,
   GET_MOVIE,
@@ -8,6 +7,7 @@ import {
   DELETE_MOVIE,
   ADD_MOVIES,
   UPDATE_MOVIE,
+  PROGRESS_FEED,
 } from './types';
 
 const baseUrl = 'https://immense-dusk-13622.herokuapp.com/';
@@ -26,7 +26,6 @@ export const addMovies = formData => async dispatch => {
       type: ADD_MOVIES,
       payload: res.data,
     });
-    // dispatch(setAlert('Movie created', 'success'));
   } catch (err) {
     dispatch({
       type: MOVIES_ERROR,
@@ -35,7 +34,7 @@ export const addMovies = formData => async dispatch => {
   }
 };
 
-export const updateMovie = (id, movie) => async dispatch => {
+export const updateMovie = (id, movie, history) => async dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -50,7 +49,7 @@ export const updateMovie = (id, movie) => async dispatch => {
       type: UPDATE_MOVIE,
       payload: res.data,
     });
-    // dispatch(setAlert('Movie updated', 'success'));
+    history.push(`/series/${id}`);
   } catch (err) {
     dispatch({
       type: MOVIES_ERROR,
@@ -103,7 +102,7 @@ export const getMovie = id => async dispatch => {
   }
 };
 
-export const deleteMovie = id => async dispatch => {
+export const deleteMovie = (id, history) => async dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -117,7 +116,29 @@ export const deleteMovie = id => async dispatch => {
       type: DELETE_MOVIE,
       payload: id,
     });
-    dispatch(setAlert('Movie Removed', 'success'));
+    history.push('/series');
+  } catch (err) {
+    dispatch({
+      type: MOVIES_ERROR,
+      payload: err,
+    });
+  }
+};
+
+export const getProgress = () => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  };
+  try {
+    const res = await axios.get(`${baseUrl}/movies/progress`, config);
+    dispatch({
+      type: PROGRESS_FEED,
+      payload: res.data.progress,
+    });
   } catch (err) {
     dispatch({
       type: MOVIES_ERROR,
