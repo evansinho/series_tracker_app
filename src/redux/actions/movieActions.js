@@ -10,7 +10,7 @@ import {
   PROGRESS_FEED,
 } from './types';
 
-const baseUrl = 'https://immense-dusk-13622.herokuapp.com/';
+const baseUrl = 'https://immense-dusk-13622.herokuapp.com';
 
 export const addMovies = formData => async dispatch => {
   const config = {

@@ -1,56 +1,80 @@
 /* eslint-disable import/prefer-default-export */
-const baseUrl = 'https://immense-dusk-13622.herokuapp.com/';
+import axios from 'axios';
+import { AUTH_FAIL } from './types';
+import setAuthToken from '../../utils/setAuthToken';
+
+const baseUrl = 'https://immense-dusk-13622.herokuapp.com';
 
 const setUser = payload => ({ type: 'SET_USER', payload });
 
 // Load user
-export const loadUser = () => dispatch => {
-  fetch(`${baseUrl}/auto_login`, {
+export const loadUser = () => async dispatch => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
+  const config = {
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
-  })
-    .then(res => res.json())
-    .then(data => {
-      localStorage.setItem('token', data.token);
-      dispatch(setUser(data.user));
+  };
+  try {
+    const res = await axios.get(`${baseUrl}/auto_login`, config);
+    localStorage.setItem('token', res.data.token);
+    dispatch(setUser(res.data.user));
+  } catch (err) {
+    dispatch({
+      type: AUTH_FAIL,
+      payload: err,
     });
+  }
 };
 
 // Register
-export const register = userInfo => dispatch => {
-  fetch(`${baseUrl}/signup`, {
-    method: 'POST',
+export const register = userInfo => async dispatch => {
+  const config = {
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
     body: JSON.stringify(userInfo),
-  })
-    .then(res => res.json())
-    .then(data => {
-      localStorage.setItem('token', data.token);
-      dispatch(setUser(data.user));
+  };
+
+  try {
+    const res = await axios.post(`${baseUrl}/signup`, userInfo, config);
+    localStorage.setItem('token', res.data.token);
+    dispatch(setUser(res.data.user));
+  } catch (err) {
+    dispatch({
+      type: AUTH_FAIL,
+      payload: err,
     });
+  }
 };
 
 // Login
-export const login = userInfo => dispatch => {
-  fetch(`${baseUrl}/login`, {
-    method: 'POST',
+export const login = userInfo => async dispatch => {
+  const config = {
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
     body: JSON.stringify(userInfo),
-  })
-    .then(res => res.json())
-    .then(data => {
-      localStorage.setItem('token', data.token);
-      dispatch(setUser(data.user));
+  };
+
+  try {
+    const res = await axios.post(`${baseUrl}/login`, userInfo, config);
+    localStorage.setItem('token', res.data.token);
+    dispatch(setUser(res.data.user));
+  } catch (err) {
+    dispatch({
+      type: AUTH_FAIL,
+      payload: err,
     });
+  }
 };
 
 // Logout
