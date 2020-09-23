@@ -1,68 +1,95 @@
+# Series Tracker
+
+In this app you can keep track of your favourite movie series, based on a goal you set. Built with Ruby on Rails, React, Bootstrap and Redux.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## snapshot
+![tracker](snapshot1.png)
 
-In the project directory, you can run:
+![tracker](snapshot2.png)
 
-### `npm start`
+![tracker](snapshot3.png)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Link to API Repository
+[Series Tracker API](https://github.com/evansinho/series_tracker_api)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
-### `npm test`
+## live demo
+[Series Tracker App](https://evanson-series-tracker.netlify.app/)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[Series Tracker API](https://immense-dusk-13622.herokuapp.com/)
 
-### `npm run build`
+## Nice to have requirements
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Implement proper user authentication from the front-end to the server
+- Create a user table in your database, so that a given user could only access the measurements they entered
+- Create an admin panel to create / update / delete things to measure
+- Make the app responsive, creating both tablet and desktop versions, following design guidelines
+- You could implement transitions to make user experience better
+- You can implement the progress page with data charts
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## What it does?
+- When the App is executed, you will be able to:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+ - Login or signup as a new user;
+ - Add series you are seeing with your episode and season goal, together with the amount you already completed;
+ - Get a list of all series you are currently seeing;
+ - View a single series details, edit or delete it;
+ - View your overall progress with a Pie Chart.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Built with
+- React
+- Ruby on Rails
+- JavaScript/ES6
+- React Hooks
+- React Router
+- Redux
+- Boostrap
+- React Redux
+- Netlify
+- Heroku
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Prerequisites
 
-## Learn More
+- Node
+- Npm
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Setup
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- git clone `https://github.com/evansinho/series_tracker_app`
+- cd Series_tracker_app
+- run npm install
+- run npm run start
 
-### Code Splitting
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## Authors
 
-### Analyzing the Bundle Size
+👤 **Evanson Igiri**
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+- [Portfolio](https://evansinho.github.io/Evanson-igiri/)
+- [Twitter](https://twitter.com/iamsinho1304)
+- [Linkedin](LinkedIn.com/in/evanson-igiri)
+- [Email](mailto:igiri.evanson@gmail.com)
 
-### Making a Progressive Web App
+## 🤝 Contributing
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+Contributions, issues and feature requests are welcome!
 
-### Advanced Configuration
+Feel free to check the [issues page](https://github.com/evansinho/series_tracker_app/issues).
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+## Show your support
 
-### Deployment
+Give a ⭐️ if you like this project!
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+## Acknowledgments
 
-### `npm run build` fails to minify
+- MIcroverse
+- Microverse TSE's
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## 📝 License
+
+This project is [Apache](lic.url) licensed.
